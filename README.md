@@ -26,6 +26,15 @@ This repo provides an end-to-end pipeline for:
 
 > EMemBench is not a single fixed dataset. It is a **benchmark generator + evaluation harness**: run an agent → log → generate QA with programmatic GT → answer & score.
 
+
+<p align="center">
+  <img src="paper/emembench concept.png" width="600" />
+</p>
+<p align="center">
+  <em>Figure 1: EMemBench overview. An agent interacts with game environment to produce an episode trajectory. We log agent-observable signals and all underlying game signals. A carefully designed algorithm converts each episode into a QA set with calculated ground truths, and the same agent then answers these questions using only agent-observable context plus its own memory.</em>
+</p>
+
+
 ---
 
 ## Key Ideas
