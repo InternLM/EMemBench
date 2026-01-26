@@ -12,7 +12,7 @@
     <a href="https://yuhangzang.github.io/"><strong>Yuhang Zang</strong></a>
     ·
     <a href="https://sites.google.com/view/yixin-homepage"><strong>Yixin Cao</strong></a>
-    .
+    ·
     <a href="https://personal.ntu.edu.sg/axsun/"><strong>Aixin Sun</strong></a>
   </p>
 
