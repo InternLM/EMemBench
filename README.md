@@ -28,10 +28,6 @@ This repo provides an end-to-end pipeline for:
 
 ---
 
-## Paper
-
----
-
 ## Key Ideas
 
 - **Trajectory-conditioned QA**: questions are derived from the agent’s **own** interaction trace.
