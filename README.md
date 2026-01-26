@@ -1,4 +1,21 @@
-# EMemBench: Interactive Benchmarking of Episodic Memory for VLM Agents
+<p align="center">
+  <h1 align="center">EMemBench: Interactive Benchmarking of Episodic Memory for VLM Agents</h1>
+    <p align="center">
+    <a href="https://lixinze777.github.io/"><strong>Xinze Li</strong></a>
+    ·
+    <strong>Ziyue Zhu</strong>
+    ·
+    <strong>Siyuan Liu</strong>
+    ·
+    <a href="https://mayubo2333.github.io"><strong>Yubo Ma</strong></a>
+    ·
+    <a href="https://yuhangzang.github.io/"><strong>Yuhang Zang</strong></a>
+    ·
+    <a href="https://sites.google.com/view/yixin-homepage"><strong>Yixin Cao</strong></a>
+    .
+    <a href="https://personal.ntu.edu.sg/axsun/"><strong>Aixin Sun</strong></a>
+  </p>
+
 
 EMemBench is a **programmatic benchmark framework** for evaluating **episodic (experience-grounded) memory** in interactive agents.  
 Instead of using a fixed, static QA set, EMemBench generates questions **from each agent’s own interaction trajectory** and computes **verifiable ground-truth answers** from underlying game signals.
@@ -13,9 +30,6 @@ This repo provides an end-to-end pipeline for:
 
 ## Paper
 
-**EMemBench: Interactive Benchmarking of Episodic Memory for VLM Agents**  
-Xinze Li, Ziyue Zhu, Siyuan Liu, Yubo Ma, Yuhang Zang, Yixin Cao†, Aixin Sun†
-
 ---
 
 ## Key Ideas
@@ -27,7 +41,7 @@ Xinze Li, Ziyue Zhu, Siyuan Liu, Yubo Ma, Yuhang Zang, Yixin Cao†, Aixin Sun�
 
 ---
 
-## Repository Layout (Expected)
+## Repository Layout
 
 ### Text (Jericho)
 
@@ -38,6 +52,11 @@ text_game/
   generate_jericho_qa.py     # QA generation (+ indices/maps)
   answer_jericho_qa.py       # answer + eval
   run_text_game_pipeline.py  # E2E entry (play -> gen -> answer)
+
+game_envs/
+  advent.z5
+  ...
+  zork3.z5
 
 logs/
   <game>/..._logs.jsonl
@@ -181,80 +200,6 @@ python run_visual_game_pipeline.py \
 
 ---
 
-## Stage-by-Stage Usage (Debug / Research Workflow)
-
-You can run each stage separately to inspect logs/frames, regenerate QA deterministically, or swap in a different answering model.
-
-### 1) Play & log
-
-**Jericho**
-```bash
-python run_jericho_openai.py \
-  --rom game_envs/zork3.z5 \
-  --model gpt-5.1 \
-  --max_steps 200 \
-  --history_turns 30 \
-  --logdir logs/zork3
-```
-
-**Crafter**
-```bash
-python run_crafter_openai.py \
-  --steps 500 \
-  --seed 42 \
-  --history-turns 10
-```
-
-### 2) Generate QA (Query Horizon Control)
-
-**Jericho**
-```bash
-python generate_jericho_qa.py \
-  --input-dir logs/zork3 \
-  --default-folder <RUN_NAME> \
-  --game zork3 \
-  --output-dir generated_qa \
-  --max-per-type 2 \
-  --difficulty -1 \
-  --paraphrase True
-```
-
-**Crafter**
-```bash
-python generate_crafter_qa.py \
-  --log-file log/seed42/<RUN_NAME>/logs.jsonl \
-  --map-file log/seed42/<RUN_NAME>/map_seed42.txt \
-  --output-dir generated_qa/seed42/<RUN_NAME>/DIF_-1 \
-  --difficulty -1
-```
-
-### 3) Answer & evaluate
-
-**Jericho**
-```bash
-python answer_jericho_qa.py \
-  --run-folder generated_qa/zork3/<RUN_NAME> \
-  --model gpt-5.1 \
-  --temperature 0.0 \
-  --max-tokens 1024 \
-  --source paraphrase \
-  --batch-size 8
-```
-
-**Crafter**
-```bash
-python answer_crafter_qa.py \
-  --run-folder generated_qa/seed42/<RUN_NAME> \
-  --source paraphrase \
-  --temperature 0.0 \
-  --max-tokens 4096 \
-  --batch-size 8 \
-  --frames-mode mosaic \
-  --model gpt-5.1
-```
-
----
-
 ## Outputs
 
 ### Logs
@@ -275,3 +220,16 @@ python answer_crafter_qa.py \
 
 - Jericho: https://github.com/microsoft/jericho
 - Crafter: https://github.com/danijar/crafter
+
+## ✒️Citation
+```
+@misc{li2026emembenchinteractivebenchmarkingepisodic,
+      title={EMemBench: Interactive Benchmarking of Episodic Memory for VLM Agents}, 
+      author={Xinze Li and Ziyue Zhu and Siyuan Liu and Yubo Ma and Yuhang Zang and Yixin Cao and Aixin Sun},
+      year={2026},
+      eprint={2601.16690},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2601.16690}, 
+}
+```
