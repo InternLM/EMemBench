@@ -16,8 +16,6 @@ This repo provides an end-to-end pipeline for:
 **EMemBench: Interactive Benchmarking of Episodic Memory for VLM Agents**  
 Xinze Li, Ziyue Zhu, Siyuan Liu, Yubo Ma, Yuhang Zang, Yixin Cao†, Aixin Sun†
 
-to do
-
 ---
 
 ## Key Ideas
